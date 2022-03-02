@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.toptal.calories.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="com.toptal.calories.ui.main.entries_list.EntryListFragment"
+        android:label="@string/entries_label"
+        tools:layout="@layout/fragment_entry_list">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.toptal.calories.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:name="com.toptal.calories.ui.main.add_entry.AddEntryFragment"
+        android:label="@string/add_entry_label"
+        tools:layout="@layout/fragment_add_entry">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"

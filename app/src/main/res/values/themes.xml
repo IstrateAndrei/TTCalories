@@ -22,4 +22,5 @@
     <style name="Theme.Calories.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Calories.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
