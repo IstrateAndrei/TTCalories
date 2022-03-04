@@ -12,8 +12,11 @@
         tools:layout="@layout/fragment_entry_list">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
+            android:id="@+id/entries_to_add_action"
             app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/entries_to_settings_action"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -22,7 +25,15 @@
         tools:layout="@layout/fragment_add_entry">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/add_to_entries_action"
             app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/add_to_settings_action"
+            app:destination="@id/settingsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.toptal.calories.ui.settings.SettingsFragment"
+        android:label="@string/action_settings"
+        tools:layout="@layout/settings_fragment_layout" />
 </navigation>

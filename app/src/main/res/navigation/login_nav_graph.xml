@@ -7,20 +7,18 @@
 
     <fragment
         android:id="@+id/userLoginFragment"
-        android:name="com.toptal.calories.ui.auth.UserLoginFragment"
-        android:label="UserLoginFragment"
+        android:name="com.toptal.calories.ui.auth.login.LoginFragment"
+        android:label="Login"
         tools:layout="@layout/fragment_user_login">
         <action
-            android:id="@+id/action_userLoginFragment_to_adminLoginFragment"
-            app:destination="@id/adminLoginFragment" />
+            android:id="@+id/login_to_register_action"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
-        android:id="@+id/adminLoginFragment"
-        android:name="com.toptal.calories.ui.auth.AdminLoginFragment"
-        android:label="AdminLoginFragment"
-        tools:layout="@layout/fragment_admin_login">
-        <action
-            android:id="@+id/action_adminLoginFragment_to_userLoginFragment"
-            app:destination="@id/userLoginFragment" />
+        android:id="@+id/registerFragment"
+        android:name="com.toptal.calories.ui.auth.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/register_fragment_layout">
+
     </fragment>
 </navigation>

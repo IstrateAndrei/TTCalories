@@ -1,28 +1,30 @@
 package com.toptal.calories.data.repository
 
-import androidx.lifecycle.LiveData
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
 import com.toptal.calories.data.model.FoodEntry
+import com.toptal.calories.data.remote.RemoteDataSource
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.*
 
-class Repository {
+class Repository : KoinComponent {
+
+    private val remoteDataSource by inject<RemoteDataSource>()
 
 
-    fun getEntries(): MutableList<FoodEntry> {
-        //todo this remote - Realtime DB Firebase
-
-        //mocked data for now
-        var list = mutableListOf<FoodEntry>()
-
-        for (i in 0..10) {
-            val entry = FoodEntry()
-            entry.timeStamp = Date()
-            entry.foodName = "Food ${i + 1}"
-            entry.calories = (224 * i).toFloat()
-            list.add(entry)
-        }
-
-        return list
+    fun getAllEntries(): Task<QuerySnapshot> {
+        return remoteDataSource.getAllEntries()
     }
 
+    fun getUserRole(userId: String): Task<DocumentSnapshot> {
+        return remoteDataSource.getUserRole(userId)
+    }
+
+    fun getUserEntries(userId: String): Task<QuerySnapshot> {
+        return remoteDataSource.getEntriesByUserId(userId)
+    }
 
 }

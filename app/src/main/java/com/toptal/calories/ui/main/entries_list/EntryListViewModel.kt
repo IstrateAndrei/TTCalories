@@ -1,6 +1,5 @@
 package com.toptal.calories.ui.main.entries_list
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.toptal.calories.data.model.FoodEntry
@@ -14,8 +13,13 @@ class EntryListViewModel : ViewModel(), KoinComponent {
 
     var getFoodEntriesObservable = MutableLiveData<MutableList<FoodEntry>>()
 
-    init {
-        getFoodEntriesObservable.value = repository.getEntries()
+    fun getUserEntries(userId: String) {
+        repository.getUserEntries(userId).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val q = task.result
+                getFoodEntriesObservable.value = q.toObjects(FoodEntry::class.java)
+            }
+        }
     }
 
 }

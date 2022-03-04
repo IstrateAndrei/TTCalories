@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.toptal.calories.R
 import com.toptal.calories.databinding.FragmentEntryListBinding
 import com.toptal.calories.utils.base.BaseFragment
@@ -29,10 +31,13 @@ class EntryListFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        toggleLoading(true)
+        setHasOptionsMenu(true)
         mViewModel = ViewModelProvider(this).get(EntryListViewModel::class.java)
         initViews()
         initListeners()
         observe()
+        mViewModel!!.getUserEntries(FirebaseAuth.getInstance().currentUser?.uid!!)
     }
 
     override fun onDestroyView() {
@@ -45,6 +50,7 @@ class EntryListFragment : BaseFragment() {
             if (it.isNotEmpty()) {
                 (binding.felRv.adapter as EntriesAdapter).updateList(it)
             }
+            toggleLoading(false)
         }
     }
 
@@ -58,7 +64,7 @@ class EntryListFragment : BaseFragment() {
 
     override fun initListeners() {
         binding.felFab.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.entries_to_add_action)
         }
     }
 

@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.orhanobut.hawk.Hawk
+import com.toptal.calories.R
 import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.EntryItemAdapterLayoutBinding
+import com.toptal.calories.utils.Constants
 
 class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
 
@@ -58,8 +61,21 @@ class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
 
         fun displayData(item: FoodEntry, position: Int) {
             _binding?.eiaNameTv?.text = item.foodName
-            _binding?.eiaDateTv?.text = item.timeStamp.toString()
+            _binding?.eiaDateTv?.text = item.timestamp.toString()
             _binding?.eiaCalorieTv?.text = item.calories.toString()
+
+            handleCaloricLimit(item)
+        }
+
+        fun handleCaloricLimit(item: FoodEntry) {
+            if (Hawk.get<Int>(Constants.HAWK_CALORIC_LIMIT_KEY) != null) {
+                var caloricLimit = Hawk.get<Int>(Constants.HAWK_CALORIC_LIMIT_KEY)
+                item.calories?.let { value ->
+                    if (caloricLimit <= value.toInt()) {
+                        _binding?.eiaClParent?.setBackgroundResource(R.drawable.entry_item_card_parent_background_drawable)
+                    }
+                }
+            }
         }
     }
 

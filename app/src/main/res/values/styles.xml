@@ -8,6 +8,7 @@
         <item name="android:layout_margin">@dimen/default_text_margin_dimen</item>
         <item name="android:drawablePadding">@dimen/default_text_margin_dimen</item>
         <item name="android:gravity">center_vertical</item>
+        <item name="fontFamily">@font/alleyn_regular</item>
     </style>
 
     <style name="itemSubtitleTextViewStyle" parent="Widget.AppCompat.TextView">
@@ -15,6 +16,38 @@
         <item name="android:textSize">@dimen/text_small_size_dimen</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:drawablePadding">@dimen/default_text_margin_dimen</item>
+        <item name="fontFamily">@font/alleyn_regular</item>
+    </style>
+
+    <style name="defaultEditField" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/alleyn_regular</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:drawablePadding">16dp</item>
+        <item name="android:layout_margin">@dimen/default_text_padding_dimen</item>
+    </style>
+
+    <style name="defaultTextView" parent="Widget.AppCompat.TextView">
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/alleyn_regular</item>
+    </style>
+
+    <style name="defaultButton" parent="TextAppearance.AppCompat.Button">
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:background">@drawable/default_button_background_drawable</item>
+        <item name="fontFamily">@font/alleyn_regular</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="defaultCheckbox" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="fontFamily">@font/alleyn_regular</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">14sp</item>
+
     </style>
 
 </resources>

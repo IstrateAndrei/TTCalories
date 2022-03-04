@@ -1,23 +1,20 @@
-package com.toptal.calories.ui.auth
+package com.toptal.calories.ui.admin.reports
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.toptal.calories.databinding.FragmentUserLoginBinding
 import com.toptal.calories.utils.base.BaseFragment
 
-class UserLoginFragment : BaseFragment() {
+class ReportDataFragment : BaseFragment() {
 
-    var _binding: FragmentUserLoginBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentUserLoginBinding.inflate(inflater, container, false)
-        return _binding?.root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

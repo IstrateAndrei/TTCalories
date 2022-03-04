@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/sf_limit_label_tv"
@@ -13,18 +13,18 @@
         android:text="@string/current_caloric_limit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sf_hgl"/>
+        app:layout_constraintTop_toBottomOf="@id/sf_hgl" />
 
     <TextView
         android:id="@+id/sf_limit_value_tv"
+        style="@style/itemTitleTextViewStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/sf_limit_label_tv"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@id/sf_limit_label_tv"
+        app:layout_constraintStart_toStartOf="@id/sf_limit_label_tv"
         app:layout_constraintTop_toBottomOf="@id/sf_limit_label_tv"
-        style="@style/itemTitleTextViewStyle"
-        tools:text="2100"
-        android:textSize="24sp"/>
+        tools:text="2100" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/sf_hgl"
@@ -32,5 +32,38 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.12" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/sf_change_til"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sf_limit_value_tv">
+
+        <EditText
+            android:id="@+id/sf_change_et"
+            style="@style/defaultEditField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_calories_16"
+            android:hint="@string/change_limit"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/sf_set_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/default_margin_dimen"
+        android:enabled="false"
+        android:text="@string/apply"
+        app:layout_constraintEnd_toEndOf="@id/sf_change_til"
+        app:layout_constraintStart_toStartOf="@id/sf_change_til"
+        app:layout_constraintTop_toBottomOf="@id/sf_change_til" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
