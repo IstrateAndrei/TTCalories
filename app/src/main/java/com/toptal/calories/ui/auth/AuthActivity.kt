@@ -8,6 +8,8 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.toptal.calories.R
 import com.toptal.calories.utils.base.BaseActivity
+import com.toptal.calories.utils.isUserLoggedIn
+import com.toptal.calories.utils.openMainScreen
 
 class AuthActivity : BaseActivity() {
 
@@ -16,8 +18,13 @@ class AuthActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        //skip Auth screen if user logged in
+        if (isUserLoggedIn()) {
+            this.openMainScreen()
+            return
+        }
 
+        setContentView(R.layout.activity_login)
         navController = findNavController(R.id.nav_host_fragment_content_login)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -28,4 +35,5 @@ class AuthActivity : BaseActivity() {
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
     }
+
 }

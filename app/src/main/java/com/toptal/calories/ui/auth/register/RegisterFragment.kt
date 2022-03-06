@@ -4,13 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.toptal.calories.R
-import com.toptal.calories.databinding.FragmentAdminLoginBinding
 import com.toptal.calories.databinding.RegisterFragmentLayoutBinding
 import com.toptal.calories.utils.base.BaseFragment
 import com.toptal.calories.utils.getViewVisibility
@@ -50,14 +48,23 @@ class RegisterFragment : BaseFragment() {
             } else {
                 showSnackMessage(requireView(), getString(R.string.registration_failed_string))
             }
-            toggleLoading(false)
         })
 
         registerViewModel.sendVerificationObservable.observe(viewLifecycleOwner, Observer {
             if (it.isSuccessful) {
-                showSnackMessage(requireView(), getString(R.string.email_verification_message_string))
+                showSnackMessage(
+                    requireView(),
+                    getString(R.string.email_verification_message_string)
+                )
+                FirebaseAuth.getInstance().currentUser?.let { user ->
+                    registerViewModel.registerToFireStore(user.email!!, user.displayName!!, user.uid)
+                }
+
             } else {
-                showSnackMessage(requireView(), getString(R.string.error_send_email_verification_message_string))
+                showSnackMessage(
+                    requireView(),
+                    getString(R.string.error_send_email_verification_message_string)
+                )
             }
             toggleLoading(false)
             findNavController().popBackStack()

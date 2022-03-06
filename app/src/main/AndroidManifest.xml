@@ -11,10 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Calories">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Calories.NoActionBar">
+            android:theme="@style/Theme.Calories.NoActionBar"
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name=".ui.auth.AuthActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,20 +28,10 @@
         </activity>
 
         <activity
-            android:name=".ui.auth.AuthActivity"
-            android:exported="true"
-            android:label="Login">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
-
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
-        </activity>
-
-        <activity
             android:name=".ui.admin.AdminActivity"
             android:exported="true"
-            android:label="Admin" />
+            android:label="Admin Panel"
+            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

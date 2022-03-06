@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fdd_vgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/fdd_pick_from_label_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:text="@string/from"
+        app:layout_constraintEnd_toEndOf="@id/fdd_vgl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/fdd_from_clock_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:src="@drawable/ic_baseline_calendar_month_24"
+        app:layout_constraintEnd_toEndOf="@id/fdd_pick_from_label_tv"
+        app:layout_constraintStart_toStartOf="@id/fdd_pick_from_label_tv"
+        app:layout_constraintTop_toBottomOf="@id/fdd_pick_from_label_tv" />
+
+    <TextView
+        android:id="@+id/fdd_from_value_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        app:layout_constraintEnd_toEndOf="@id/fdd_from_clock_iv"
+        app:layout_constraintStart_toStartOf="@id/fdd_from_clock_iv"
+        app:layout_constraintTop_toBottomOf="@id/fdd_from_clock_iv"
+        tools:text="Mar 12, 2022" />
+
+    <!--    To side-->
+
+    <TextView
+        android:id="@+id/fdd_pick_to_label_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:text="@string/to"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/fdd_vgl"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/fdd_to_clock_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:src="@drawable/ic_baseline_calendar_month_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/fdd_vgl"
+        app:layout_constraintTop_toBottomOf="@id/fdd_pick_to_label_tv" />
+
+    <TextView
+        android:id="@+id/fdd_to_value_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        app:layout_constraintEnd_toEndOf="@id/fdd_to_clock_iv"
+        app:layout_constraintStart_toStartOf="@id/fdd_to_clock_iv"
+        app:layout_constraintTop_toBottomOf="@id/fdd_to_clock_iv"
+        tools:text="Mar 12, 2022" />
+
+    <Button
+        android:id="@+id/fdd_from_clear_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:enabled="false"
+        android:text="@string/clear_from"
+        app:layout_constraintEnd_toEndOf="@id/fdd_vgl"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fdd_from_value_tv" />
+
+    <Button
+        android:id="@+id/fdd_to_clear_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:enabled="false"
+        android:text="@string/clear_to"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/fdd_vgl"
+        app:layout_constraintTop_toBottomOf="@id/fdd_to_value_tv" />
+
+    <Button
+        android:id="@+id/fdd_apply_btn"
+        style="@style/defaultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="@dimen/default_margin_dimen"
+        android:enabled="false"
+        android:text="@string/apply"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/fdd_vgl"
+        app:layout_constraintStart_toStartOf="@id/fdd_vgl"
+        app:layout_constraintTop_toBottomOf="@id/fdd_from_clear_btn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,4 +4,5 @@
     <dimen name="text_default_size_dimen">16sp</dimen>
     <dimen name="default_text_padding_dimen">5dp</dimen>
     <dimen name="default_text_margin_dimen">5dp</dimen>
+    <dimen name="small_padding_dimen">3dp</dimen>
 </resources>

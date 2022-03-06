@@ -1,7 +1,10 @@
 package com.toptal.calories.ui.main.entries_list
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.QuerySnapshot
 import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.data.repository.Repository
 import org.koin.core.component.KoinComponent
@@ -14,12 +17,16 @@ class EntryListViewModel : ViewModel(), KoinComponent {
     var getFoodEntriesObservable = MutableLiveData<MutableList<FoodEntry>>()
 
     fun getUserEntries(userId: String) {
-        repository.getUserEntries(userId).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val q = task.result
-                getFoodEntriesObservable.value = q.toObjects(FoodEntry::class.java)
+
+        val snapShotListener = EventListener<QuerySnapshot> { value, error ->
+            if (error != null) {
+                //fail
+                Log.e("Fail", "Failure")
+                return@EventListener
             }
+            getFoodEntriesObservable.value = value?.toObjects(FoodEntry::class.java)
         }
+        repository.getUserEntries(userId, snapShotListener)
     }
 
 }

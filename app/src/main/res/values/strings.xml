@@ -33,6 +33,8 @@
     <string name="food_name">Food name</string>
     <string name="caloric_value">Caloric value</string>
     <string name="date_time">Date/Time</string>
+    <string name="update">Update</string>
+    <string name="pick_entry_time">Pick entry time</string>
 
     <!--    Settings Strings-->
     <string name="current_caloric_limit">Current caloric limit:</string>
@@ -44,4 +46,15 @@
 
     <!--    Admin Panel Strings-->
     <string name="reports">Reports</string>
+    <string name="entry_deleted">Entry deleted!</string>
+    <string name="number_of_added_entries_in_last_seven_days">Number of entries in the last 7 days:</string>
+    <string name="number_of_added_entries_in_last_14_days">Number of entries in the last 14 days:</string>
+    <string name="number_of_added_entries_in_the_week_before_days">Number of entries the week before:</string>
+    <string name="average_user_calories_last_days">Average user calories\n in the last 7 days</string>
+
+    <!--    Filter dialog Strings-->
+    <string name="from">From</string>
+    <string name="clear_from">Clear From</string>
+    <string name="to">To</string>
+    <string name="clear_to">Clear To</string>
 </resources>

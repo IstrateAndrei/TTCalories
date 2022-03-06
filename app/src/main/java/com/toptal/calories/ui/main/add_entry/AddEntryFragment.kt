@@ -6,48 +6,64 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
-import com.google.firebase.firestore.FirebaseFirestore
 import com.toptal.calories.R
 import com.toptal.calories.data.model.FoodEntry
-import com.toptal.calories.databinding.FragmentAddEntryBinding
+import com.toptal.calories.databinding.AddEntryFragmentLayoutBinding
+
+import com.toptal.calories.utils.*
 import com.toptal.calories.utils.base.BaseFragment
-import com.toptal.calories.utils.showSnackMessage
 import java.util.*
 
-
-/**
- * A simple [Fragment] subclass as the second destination in the navigation.
- */
 class AddEntryFragment : BaseFragment() {
 
-    private var _binding: FragmentAddEntryBinding? = null
+    private var _binding: AddEntryFragmentLayoutBinding? = null
     private val binding get() = _binding!!
-    private var date = ""
+
+    private var selectedDate: Calendar? = null
+
+    private lateinit var addEntryViewModel: AddEntryViewModel
+
+    //admin panel edit
+    private var isAdminAdd = false
+    private var adminItem: FoodEntry? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentAddEntryBinding.inflate(inflater, container, false)
+        _binding = AddEntryFragmentLayoutBinding.inflate(inflater, container, false)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setHasOptionsMenu(true)
+        addEntryViewModel = ViewModelProvider(this).get(AddEntryViewModel::class.java)
+        arguments?.let {
+            isAdminAdd = it.getBoolean(Constants.BUNDLE_ADMIN_ADD_KEY)
+            adminItem = it.getParcelable(Constants.BUNDLE_ADMIN_ITEM_KEY)
+        }
         initViews()
         initListeners()
         observe()
     }
 
     override fun observe() {
-
+        addEntryViewModel.addNewEntryObservable.observe(viewLifecycleOwner) {
+            showSnackMessage(requireView(), "Added new food entry!")
+            if (isAdminAdd) {
+                requireActivity().supportFragmentManager.popBackStack()
+            } else {
+                findNavController().popBackStack()
+            }
+        }
+        addEntryViewModel.updateEntryObservable.observe(viewLifecycleOwner) {
+            showSnackMessage(requireView(), "Food entry updated!")
+            requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     override fun toggleLoading(isLoading: Boolean) {
@@ -55,11 +71,27 @@ class AddEntryFragment : BaseFragment() {
     }
 
     override fun initViews() {
-
+        if (adminItem != null) {
+            //show delete button
+            adminItem?.let { entry ->
+                binding.faeAddBtn.text = requireActivity().resources.getString(R.string.update)
+                entry.name?.let {
+                    binding.faeFoodEt.setText(it)
+                }
+                binding.faeCalorieEt.setText(entry.calories.toString())
+                entry.entry_date?.let {
+                    binding.faeDateTv.visibility = getViewVisibility(true)
+                    binding.faeDateTv.text = getStringFromDateTime(it)
+                }
+            }
+        } else {
+            //normal add entry flow
+        }
     }
 
     override fun initListeners() {
-        binding.faeTimeTil.setOnClickListener {
+
+        binding.faePickDateBtn.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
                 dateListener,
@@ -72,42 +104,49 @@ class AddEntryFragment : BaseFragment() {
         binding.faeAddBtn.setOnClickListener {
             val foodName = binding.faeFoodEt.text.toString()
             val caloricValue = binding.faeCalorieEt.text.toString()
-            val date = binding.faeTimeEt.text.toString()
+            val entryDate = binding.faeDateTv.text.toString()
 
-            if (foodName.isEmpty() || caloricValue.isEmpty() || date.isEmpty()) {
+            if (foodName.isEmpty() || caloricValue.isEmpty() || entryDate.isEmpty()) {
                 showSnackMessage(requireView(), getString(R.string.complete_fields_warning_string))
                 return@setOnClickListener
-            } else {
+            }
 
-                val db = FirebaseFirestore.getInstance()
-                val foodEntryRef = db.collection("food_entries").document()
-
-                val entry = FoodEntry()
-                entry.timestamp = Date() //todo get data from date val
-                entry.calories = caloricValue.toInt()
-                entry.foodName = foodName
-                entry.creator_id = FirebaseAuth.getInstance().currentUser?.uid ?: ""
-                entry.entry_id = foodEntryRef.id
-
-                foodEntryRef.set(entry).addOnCompleteListener { task ->
-                    if (task.isSuccessful) {
-                        showSnackMessage(requireView(), "Success")
-                        findNavController().popBackStack()
+            if (adminItem != null) {
+                adminItem?.let { item ->
+                    if (item.name == foodName && item.calories.toString() == caloricValue && getStringFromDateTime(
+                            item.entry_date!!
+                        ) == entryDate
+                    ) {
+                        showSnackMessage(requireView(), "Provide a change before editing!")
+                        return@setOnClickListener
                     } else {
-                        showSnackMessage(requireView(), "Failure")
-                        return@addOnCompleteListener
+                        val updatedItem = FoodEntry()
+                        updatedItem.name = foodName
+                        updatedItem.calories = caloricValue.toInt()
+                        updatedItem.created_at = null
+                        updatedItem.creator_id = item.creator_id
+                        updatedItem.entry_id = item.entry_id
+                        updatedItem.entry_date = if(selectedDate != null) selectedDate!!.time else getDateTimeFromString(entryDate)
+                        addEntryViewModel.updateEntry(updatedItem)
                     }
                 }
+            } else {
 
+                val entry = FoodEntry()
+                entry.created_at = null
+                entry.calories = caloricValue.toInt()
+                entry.name = foodName
+                entry.entry_date = selectedDate!!.time
+                entry.creator_id = FirebaseAuth.getInstance().currentUser?.uid ?: ""
+                addEntryViewModel.addNewEntry(entry)
             }
         }
-
-
     }
 
     private val dateListener =
         DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            date = "$year/$month/$dayOfMonth"
+            selectedDate = Calendar.getInstance()
+            selectedDate?.set(year, month, dayOfMonth)
             TimePickerDialog(
                 requireContext(),
                 timeListener,
@@ -118,14 +157,16 @@ class AddEntryFragment : BaseFragment() {
         }
 
     private val timeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-        val displayDate =
-            "$date - ${if (hourOfDay < 10) "0$hourOfDay" else "$hourOfDay"}:${if (minute < 10) "0$minute" else "$minute"}"
-        binding.faeTimeEt.setText(displayDate)
+
+        selectedDate?.set(Calendar.HOUR_OF_DAY, hourOfDay)
+        selectedDate?.set(Calendar.MINUTE, minute)
+
+        binding.faeDateTv.visibility = getViewVisibility(true)
+        binding.faeDateTv.text = selectedDate?.let { getStringFromDateTime(it.time) }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

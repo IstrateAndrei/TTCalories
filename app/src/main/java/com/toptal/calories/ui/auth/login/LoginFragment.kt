@@ -1,6 +1,5 @@
 package com.toptal.calories.ui.auth.login
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,15 +10,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.toptal.calories.MainActivity
 import com.toptal.calories.R
 import com.toptal.calories.databinding.FragmentUserLoginBinding
 import com.toptal.calories.utils.base.BaseFragment
 import com.toptal.calories.utils.getViewVisibility
 import com.toptal.calories.utils.matchesEmailPattern
+import com.toptal.calories.utils.openMainScreen
 import com.toptal.calories.utils.showSnackMessage
-import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 
 class LoginFragment : BaseFragment() {
 
@@ -58,7 +55,7 @@ class LoginFragment : BaseFragment() {
                     if (it.isEmailVerified) {
                         // open entry list screen
 //                        it.getIdToken(false).result.token // bearer token for account
-                        openMainScreen()
+                        requireActivity().openMainScreen()
                     } else {
                         showSnackMessage(
                             requireView(),
@@ -73,18 +70,11 @@ class LoginFragment : BaseFragment() {
     }
 
 
-    fun openMainScreen() {
-        startActivity(Intent(requireContext(), MainActivity::class.java))
-        requireActivity().finish()
-    }
-
-
     override fun toggleLoading(isLoading: Boolean) {
         binding.fulProgressBar.visibility = getViewVisibility(isLoading)
     }
 
     override fun initViews() {
-//keep this here for now
 
     }
 
