@@ -10,11 +10,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.toptal.calories.R
+import com.toptal.calories.data.model.Day
+import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.EntryListFragmentLayoutBinding
+import com.toptal.calories.utils.*
 import com.toptal.calories.utils.base.BaseFragment
-import com.toptal.calories.utils.getStringFromDate
-import com.toptal.calories.utils.getViewVisibility
 import java.util.*
+import kotlin.collections.HashMap
 
 class EntryListFragment : BaseFragment() {
 
@@ -32,10 +34,8 @@ class EntryListFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = EntryListFragmentLayoutBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,8 +54,33 @@ class EntryListFragment : BaseFragment() {
     }
 
     override fun observe() {
-        mViewModel?.getFoodEntriesObservable?.observe(viewLifecycleOwner) {
-            (binding.felRv.adapter as EntriesAdapter).updateList(it)
+        mViewModel?.getFoodEntriesObservable?.observe(viewLifecycleOwner) { list ->
+            val daysList = mutableListOf<Day>()
+            val map = HashMap<String, MutableList<FoodEntry>>()
+            list.forEach { item ->
+                if (!map.containsKey(getStringFromDate(item.entry_date!!))) {
+                    map[getStringFromDate(item.entry_date!!)] = mutableListOf()
+                    map[getStringFromDate(item.entry_date!!)]?.add(item)
+                } else {
+                    map[getStringFromDate(item.entry_date!!)]?.add(item)
+                }
+            }
+
+            map.keys.forEach { key ->
+                val day = Day()
+                day.dateString = key
+                day.entriesList = map[key]!!
+                daysList.add(day)
+            }
+
+            (binding.felRv.adapter as DaysAdapter).updateList(daysList.sortedBy { item ->
+                getDateFromString(
+                    item.dateString
+                )
+            } as MutableList<Day>)
+            toggleLoading(false)
+        }
+        mViewModel?.errorObservable?.observe(viewLifecycleOwner) {
             toggleLoading(false)
         }
     }
@@ -66,37 +91,62 @@ class EntryListFragment : BaseFragment() {
 
     override fun initViews() {
         initRecycler()
+        initFilterViews()
+    }
+
+    fun initFilterViews() {
+        if (hasFromFilter()) {
+            binding.felFilterFromTv.text = getFromFilter()?.let { getStringFromDate(it) }
+            binding.felFilterClearBtn.visibility = getViewVisibility(true)
+        } else {
+            binding.felFilterFromTv.text = getString(R.string.from)
+        }
+
+        if (hasToFilter()) {
+            binding.felFilterToTv.text = getToFilter()?.let { getStringFromDate(it) }
+            binding.felFilterClearBtn.visibility = getViewVisibility(true)
+        } else {
+            binding.felFilterToTv.text = getString(R.string.to)
+        }
+
+        if (!hasFromFilter() && !hasToFilter()) {
+            binding.felFilterClearBtn.visibility = getViewVisibility(false)
+        }
     }
 
     val dateListener =
         DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-
+            toggleLoading(true)
             if (isFromPicked) {
                 fromSelectDate = Calendar.getInstance()
                 fromSelectDate?.set(year, month, dayOfMonth)
                 fromSelectDate?.time?.let {
-                    val display = "From:${getStringFromDate(it)}"
-                    binding.felFilterFromTv.text = display
+                    binding.felFilterFromTv.text = getStringFromDate(it)
+                    setFromFilter(it)
+                    binding.felFilterClearBtn.visibility = getViewVisibility(true)
                 }
-                //apply filters from
-                (binding.felRv.adapter as EntriesAdapter).applyFromFilter(fromSelectDate?.time)
             }
 
             if (isToPicked) {
                 toSelectDate = Calendar.getInstance()
                 toSelectDate?.set(year, month, dayOfMonth)
                 toSelectDate?.time?.let {
-                    val display = "To:${getStringFromDate(it)}"
-                    binding.felFilterToTv.text = display
+                    binding.felFilterToTv.text = getStringFromDate(it)
+                    setToFilter(it)
+                    binding.felFilterClearBtn.visibility = getViewVisibility(true)
                 }
-                //apply filters to
-
             }
+            mViewModel?.getUserEntries(FirebaseAuth.getInstance().currentUser?.uid!!)
         }
 
     override fun initListeners() {
         binding.felFab.setOnClickListener {
-            findNavController().navigate(R.id.entries_to_add_action)
+            if (requireContext().isNetworkAvailable()) {
+                findNavController().navigate(R.id.entries_to_add_action)
+            } else {
+                showSnackMessage(requireView(), "Network unavailable, try again later.")
+            }
+
         }
 
         binding.felFilterFromTv.setOnClickListener {
@@ -122,17 +172,24 @@ class EntryListFragment : BaseFragment() {
                 Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
             ).show()
         }
-    }
 
+        binding.felFilterClearBtn.setOnClickListener {
+            toggleLoading(true)
+            fromSelectDate = null
+            toSelectDate = null
+            clearFromFilter()
+            clearToFilter()
+            binding.felFilterFromTv.text = getString(R.string.from)
+            binding.felFilterToTv.text = getString(R.string.to)
+            it.visibility = getViewVisibility(false)
+            mViewModel?.getUserEntries(FirebaseAuth.getInstance().currentUser?.uid!!)
+        }
+    }
 
     fun initRecycler() {
         if (binding.felRv.layoutManager == null) binding.felRv.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        if (binding.felRv.adapter == null) binding.felRv.adapter = EntriesAdapter()
+        if (binding.felRv.adapter == null) binding.felRv.adapter = DaysAdapter()
     }
 
-    override fun onResume() {
-        super.onResume()
-        mViewModel?.getUserEntries(FirebaseAuth.getInstance().currentUser?.uid!!)
-    }
 }

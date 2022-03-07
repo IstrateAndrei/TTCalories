@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.toptal.calories.data.model.AverageCals
 import com.toptal.calories.data.model.FoodEntry
@@ -19,8 +20,10 @@ class ReportDataFragment : BaseFragment() {
     private var _binding: AdminReportsFragmentLayoutBinding? = null
     private val binding get() = _binding!!
 
-    private val lastWeekList = mutableListOf<FoodEntry>()
+    private lateinit var reportViewModel: ReportViewModel
     private val avgCalList = mutableListOf<AverageCals>()
+
+    private val sevenDayList = mutableListOf<FoodEntry>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,54 +36,40 @@ class ReportDataFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        reportViewModel = ViewModelProvider(this).get(ReportViewModel::class.java)
         toggleLoading(true)
         initViews()
         initListeners()
         observe()
-        (requireActivity() as AdminActivity).adminViewModel.getAllEntries()
+        reportViewModel.getFirstWeekEntries()
     }
 
     override fun observe() {
-        (requireActivity() as AdminActivity).adminViewModel.allEntriesObservable.observe(
-            viewLifecycleOwner
-        ) { list ->
-            val lastWeekEntries =
-                list.filter { item ->
-                    item.entry_date!!.before(Calendar.getInstance().time) && item.entry_date!!.after(
-                        getDaysAgoDate(7)
-                    )
-                }
 
-            val lastTwoWeeksCount = list.filter { item ->
-                item.entry_date!!.before(Calendar.getInstance().time) && item.entry_date!!.after(
-                    getDaysAgoDate(14)
-                )
-            }.count()
-
-            val theWeekBeforeCounts = list.filter { item ->
-                item.entry_date!!.after(getDaysAgoDate(14)) && item.entry_date!!.before(
-                    getDaysAgoDate(7)
-                )
-            }.count()
-
-            lastWeekList.clear()
-            lastWeekList.addAll(lastWeekEntries)
-
-            binding.arfFirstWeekValueTv.text = lastWeekEntries.count().toString()
-            binding.arfSecondWeekValueTv.text = lastTwoWeeksCount.toString()
-            binding.arfWeekBeforeValueTv.text = theWeekBeforeCounts.toString()
-
-            //handle average number of calories per user for the last 7 days
-            (requireActivity() as AdminActivity).adminViewModel.getAllUsers()
+        reportViewModel.firstWeekObservable.observe(viewLifecycleOwner) { list ->
+            sevenDayList.clear()
+            sevenDayList.addAll(list)
+            binding.arfFirstWeekValueTv.text = list.size.toString()
+            reportViewModel.getSecondWeekEntries()
         }
-        (requireActivity() as AdminActivity).adminViewModel.allUsersObservable.observe(
+
+        reportViewModel.otherWeekObservable.observe(viewLifecycleOwner) {
+            binding.arfWeekBeforeValueTv.text = it.size.toString()
+            reportViewModel.getAllUsers()
+        }
+
+        reportViewModel.errorObservable.observe(viewLifecycleOwner) {
+            toggleLoading(false)
+        }
+
+        reportViewModel.allUsersObservable.observe(
             viewLifecycleOwner
         ) { userList ->
             avgCalList.clear()
             userList.forEach { user ->
                 val avgCal = AverageCals()
                 avgCal.userName = user.name
-                val uEntries = lastWeekList.filter { item -> item.creator_id == user.user_id }
+                val uEntries = sevenDayList.filter { item -> item.creator_id == user.user_id }
                 var sum = 0
                 uEntries.forEach { item ->
                     sum += item.calories

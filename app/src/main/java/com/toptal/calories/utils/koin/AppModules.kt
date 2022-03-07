@@ -1,5 +1,7 @@
 package com.toptal.calories.utils.koin
 
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestoreSettings
 import com.toptal.calories.data.local.LocalDataSource
 import com.toptal.calories.data.remote.RemoteDataSource
 import com.toptal.calories.data.repository.Repository
@@ -8,23 +10,6 @@ import org.koin.dsl.module
 
 
 object AppModules {
-    private val retrofitModule: Module = module {
-        single {
-//            val interceptor = HttpLoggingInterceptor()
-//            interceptor.level = HttpLoggingInterceptor.Level.BODY
-//
-//            val client = OkHttpClient.Builder()
-//            client.addInterceptor(interceptor)
-//
-//            Retrofit.Builder()
-//                .baseUrl("https://lynx-workout.firebaseio.com/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .client(client.build())
-//                .build()
-//                .create(ApiInterface::class.java)
-        }
-    }
 
     private val remoteDataSourceModule: Module = module {
         single { RemoteDataSource() }
@@ -38,7 +23,18 @@ object AppModules {
         single { Repository() }
     }
 
+    private val fireStoreModule: Module = module {
+        single {
+            val db = FirebaseFirestore.getInstance()
+            val settings = firestoreSettings {
+                isPersistenceEnabled = true
+            }
+            db.firestoreSettings = settings
+            return@single db
+        }
+    }
+
     val appModules =
-        listOf(retrofitModule, repoModule, remoteDataSourceModule, localDataSourceModule)
+        listOf(repoModule, remoteDataSourceModule, localDataSourceModule, fireStoreModule)
 
 }

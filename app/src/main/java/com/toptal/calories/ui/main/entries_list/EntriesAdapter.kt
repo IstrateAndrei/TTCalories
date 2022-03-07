@@ -2,7 +2,6 @@ package com.toptal.calories.ui.main.entries_list
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
@@ -15,8 +14,7 @@ import java.util.*
 
 class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
 
-    var _binding: EntryItemAdapterLayoutBinding? = null
-    val binding get() = _binding!!
+
     val entryList = mutableListOf<FoodEntry>()
 
     private lateinit var listener: OnEntryClickListener
@@ -27,12 +25,12 @@ class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EntryViewHolder {
-        _binding = EntryItemAdapterLayoutBinding.inflate(
+        val binding = EntryItemAdapterLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return EntryViewHolder(binding.root)
+        return EntryViewHolder(binding)
 
     }
 
@@ -80,15 +78,17 @@ class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
         return position
     }
 
-    inner class EntryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class EntryViewHolder(private val binding: EntryItemAdapterLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun displayData(item: FoodEntry, position: Int) {
             binding.eiaNameTv.text = item.name
             binding.eiaDateTv.text = item.entry_date?.let { getStringFromDateTime(it) }
             binding.eiaCalorieTv.text = item.calories.toString()
 
-            handleCaloricLimit(item)
             if (hasAdminRights() && ::listener.isInitialized) {
+                binding.eiaDateTv.visibility = getViewVisibility(true)
+                handleCaloricLimit(item)
                 itemView.setOnClickListener {
                     listener.onEntryClicked(item, position)
                 }
@@ -110,7 +110,9 @@ class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
                 val caloricLimit = Hawk.get<Int>(Constants.HAWK_CALORIC_LIMIT_KEY)
                 item.calories.let { value ->
                     if (caloricLimit <= value) {
-                        _binding?.eiaClParent?.setBackgroundResource(R.drawable.entry_item_card_parent_background_drawable)
+                        binding.eiaClParent.setBackgroundResource(R.drawable.entry_item_exceeded_limit_background)
+                    } else {
+                        binding.eiaClParent.setBackgroundResource(R.drawable.entry_item_default_background)
                     }
                 }
             }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/di_parent_card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/default_text_margin_dimen"
+    android:elevation="8dp"
+    app:cardCornerRadius="10dp">
+
+    <!--    android:background="#FA8072"-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/di_parent_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/di_date_label_tv"
+            style="@style/defaultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_dimen"
+            android:text="Mar 12, 2022"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/di_total_cal_tv"
+            style="@style/defaultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/default_margin_dimen"
+            android:drawableEnd="@drawable/ic_baseline_calories_16"
+            android:drawablePadding="@dimen/default_text_padding_dimen"
+            android:text="Total:3360"
+            app:layout_constraintBottom_toBottomOf="@id/di_date_label_tv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/di_date_label_tv"
+            tools:ignore="UseCompatTextViewDrawableXml" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/di_cal_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin_dimen"
+            android:layout_marginTop="@dimen/default_text_padding_dimen"
+            android:layout_marginEnd="@dimen/default_margin_dimen"
+            android:layout_marginBottom="@dimen/default_text_padding_dimen"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/di_date_label_tv" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

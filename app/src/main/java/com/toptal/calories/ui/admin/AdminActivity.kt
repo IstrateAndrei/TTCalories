@@ -47,7 +47,7 @@ class AdminActivity : BaseActivity() {
             ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                if (position == 1) adminViewModel.getAllEntries()
+                if (position == 1) adminViewModel.getAdminEntries()
             }
         })
     }

@@ -7,4 +7,10 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+<!--    day background colors-->
+    <color name="day_green">#90EE90</color>
+    <color name="day_yellow">#F0E68C</color>
+    <color name="day_red">#FA8072</color>
+
 </resources>

@@ -1,13 +1,9 @@
 package com.toptal.calories.ui.admin.entries
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.QuerySnapshot
 import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.data.model.User
@@ -19,21 +15,20 @@ class AllEntriesViewModel : ViewModel(), KoinComponent {
 
     private val repository by inject<Repository>()
 
-    var allEntriesObservable = MutableLiveData<MutableList<FoodEntry>>()
+    var entriesObservable = MutableLiveData<MutableList<FoodEntry>>()
     var deleteEntryObservable = MutableLiveData<Pair<FoodEntry, Int>>()
+    val errorObservable = MutableLiveData<Exception>()
 
-    val allUsersObservable = MutableLiveData<MutableList<User>>()
-
-    fun getAllEntries() {
+    fun getAdminEntries() {
         val snapShotListener = EventListener<QuerySnapshot> { value, error ->
             if (error != null) {
-                //fail
                 Log.e("Fail", "Failure")
+                errorObservable.value = error
                 return@EventListener
             }
-            allEntriesObservable.value = value?.toObjects(FoodEntry::class.java)
+            entriesObservable.value = value?.toObjects(FoodEntry::class.java)
         }
-        repository.getAllEntries(snapShotListener)
+        repository.getAdminEntries(snapShotListener)
     }
 
     fun deleteEntry(item: FoodEntry, position: Int) {
@@ -43,17 +38,4 @@ class AllEntriesViewModel : ViewModel(), KoinComponent {
             }
         }
     }
-
-    fun getAllUsers() {
-        val snapShotListener = EventListener<QuerySnapshot> { value, error ->
-            if (error != null) {
-                //fail
-                Log.e("Fail", "Failure")
-                return@EventListener
-            }
-            allUsersObservable.value = value?.toObjects(User::class.java)
-        }
-        repository.getAllUsers(snapShotListener)
-    }
-
 }

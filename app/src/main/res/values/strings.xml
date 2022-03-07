@@ -54,6 +54,7 @@
 
     <!--    Filter dialog Strings-->
     <string name="from">From</string>
+    <string name="clear">Clear</string>
     <string name="clear_from">Clear From</string>
     <string name="to">To</string>
     <string name="clear_to">Clear To</string>

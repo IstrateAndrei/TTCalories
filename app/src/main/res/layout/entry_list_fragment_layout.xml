@@ -14,8 +14,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-
-
         <TextView
             android:id="@+id/fel_filter_from_tv"
             style="@style/defaultTextView"
@@ -23,38 +21,51 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/default_text_margin_dimen"
             android:drawablePadding="@dimen/default_text_margin_dimen"
-            android:text="@string/from"
             android:padding="@dimen/small_padding_dimen"
+            android:text="@string/from"
+            android:textSize="14sp"
+            android:gravity="center_vertical"
             app:drawableStartCompat="@drawable/ic_baseline_filter_alt_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/fel_filter_arrow_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_text_margin_dimen"
+            android:src="@drawable/ic_baseline_arrow_forward_24"
+            app:layout_constraintBottom_toBottomOf="@id/fel_filter_to_tv"
+            app:layout_constraintEnd_toStartOf="@id/fel_filter_to_tv"
+            app:layout_constraintStart_toEndOf="@id/fel_filter_from_tv"
+            app:layout_constraintTop_toTopOf="@id/fel_filter_to_tv" />
 
         <TextView
             android:id="@+id/fel_filter_to_tv"
             style="@style/defaultTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/default_margin_dimen"
-            android:drawablePadding="@dimen/default_text_margin_dimen"
-            android:text="@string/to"
+            android:layout_marginStart="@dimen/default_text_margin_dimen"
             android:padding="@dimen/small_padding_dimen"
-            app:drawableStartCompat="@drawable/ic_baseline_filter_alt_24"
+            android:text="@string/to"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/fel_filter_from_tv"
+            app:layout_constraintStart_toEndOf="@id/fel_filter_arrow_iv"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/fel_filter_apply_btn"
+        <ImageView
+            android:id="@+id/fel_filter_clear_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_dimen"
+            android:src="@android:drawable/ic_notification_clear_all"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="@dimen/default_margin_dimen"
-            android:text="@string/apply"
-            android:enabled="false"/>
-
+            app:tint="@android:color/holo_red_light"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -67,7 +78,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/fel_filter_constraint" />
-
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fel_fab"
