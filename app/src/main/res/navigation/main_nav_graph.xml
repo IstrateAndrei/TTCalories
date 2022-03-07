@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/FirstFragment">
+
+    <fragment
+        android:id="@+id/FirstFragment"
+        android:name="com.toptal.calories.ui.main.entries_list.EntryListFragment"
+        android:label="@string/entries_label"
+        tools:layout="@layout/entry_list_fragment_layout">
+
+        <action
+            android:id="@+id/entries_to_add_action"
+            app:destination="@id/SecondFragment" />
+        <action
+            android:id="@+id/entries_to_settings_action"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/SecondFragment"
+        android:name="com.toptal.calories.ui.main.add_entry.AddEntryFragment"
+        android:label="@string/add_entry_label"
+        tools:layout="@layout/add_entry_fragment_layout">
+
+        <action
+            android:id="@+id/add_to_entries_action"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/add_to_settings_action"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.toptal.calories.ui.settings.SettingsFragment"
+        android:label="@string/action_settings"
+        tools:layout="@layout/settings_fragment_layout" />
+</navigation>

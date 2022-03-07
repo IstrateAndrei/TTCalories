@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:clickable="true"
+    android:focusable="true">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rf_left_vgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/rf_right_vgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rf_email_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@id/rf_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/rf_left_vgl"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/rf_email_et"
+            style="@style/defaultEditField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rf_username_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/rf_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/rf_left_vgl"
+        app:layout_constraintTop_toBottomOf="@id/rf_email_til">
+
+        <EditText
+            android:id="@+id/rf_username_et"
+            style="@style/defaultEditField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rf_password_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/rf_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/rf_left_vgl"
+        app:layout_constraintTop_toBottomOf="@id/rf_username_til">
+
+        <EditText
+            android:id="@+id/rf_password_et"
+            style="@style/defaultEditField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/rf_confirm_password_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="@id/rf_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/rf_left_vgl"
+        app:layout_constraintTop_toBottomOf="@id/rf_password_til">
+
+        <EditText
+            android:id="@+id/rf_confirm_password_et"
+            style="@style/defaultEditField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/confirm_password"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <CheckBox
+        android:id="@+id/rf_terms_cb"
+        style="@style/defaultCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/accept_terms_and_conditions_string"
+        app:layout_constraintStart_toStartOf="@id/rf_confirm_password_til"
+        app:layout_constraintTop_toBottomOf="@id/rf_confirm_password_til" />
+
+    <Button
+        android:id="@+id/rf_register_btn"
+        style="@style/defaultButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/register_string"
+        app:layout_constraintEnd_toEndOf="@id/rf_email_til"
+        app:layout_constraintStart_toStartOf="@id/rf_email_til"
+        app:layout_constraintTop_toBottomOf="@id/rf_terms_cb" />
+
+
+    <ProgressBar
+        android:id="@+id/rf_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/rf_register_btn" />
+
+    <TextView
+        android:id="@+id/rf_or_sign_in_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:text="@string/or_login"
+        app:layout_constraintEnd_toEndOf="@id/rf_register_btn"
+        app:layout_constraintStart_toStartOf="@id/rf_register_btn"
+        app:layout_constraintTop_toBottomOf="@id/rf_register_btn" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

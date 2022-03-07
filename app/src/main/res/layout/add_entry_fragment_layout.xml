@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:clickable="true"
+    android:focusable="true"
+    tools:context=".ui.main.add_entry.AddEntryFragment">
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fae_left_vgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fae_right_vgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fae_top_hgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fae_food_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/fae_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/fae_left_vgl"
+        app:layout_constraintTop_toTopOf="@id/fae_top_hgl">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fae_food_et"
+            style="@style/defaultEditField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_fastfood_24"
+            android:hint="@string/food_name"
+            android:inputType="textShortMessage" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/fae_caloric_til"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/fae_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/fae_left_vgl"
+        app:layout_constraintTop_toBottomOf="@id/fae_food_til">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fae_calorie_et"
+            style="@style/defaultEditField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_calories_16"
+            android:hint="@string/caloric_value"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/fae_pick_date_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:text="@string/pick_entry_time"
+        app:layout_constraintEnd_toEndOf="@id/fae_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/fae_left_vgl"
+        app:layout_constraintTop_toBottomOf="@id/fae_caloric_til" />
+
+    <TextView
+        android:id="@+id/fae_date_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_text_margin_dimen"
+        android:drawablePadding="@dimen/default_text_margin_dimen"
+        android:visibility="gone"
+        app:drawableStartCompat="@drawable/ic_baseline_timestamp_16"
+        app:layout_constraintEnd_toEndOf="@id/fae_right_vgl"
+        app:layout_constraintStart_toStartOf="@id/fae_left_vgl"
+        app:layout_constraintTop_toBottomOf="@id/fae_pick_date_btn"
+        tools:text="06/03/2022 10:35"
+        tools:visibility="visible" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fae_bottom_hgl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.7" />
+
+    <Button
+        android:id="@+id/fae_add_btn"
+        style="@style/defaultButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:text="@string/add_entry_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fae_bottom_hgl" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

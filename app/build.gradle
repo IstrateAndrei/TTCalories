@@ -1,6 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -32,17 +34,99 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    flavorDimensions "version"
+
+    productFlavors {
+        develop {
+            dimension "version"
+            applicationId "com.toptal.calories"
+            buildConfigField 'String', 'SERVER', '"https://firebase-api-dev/api/v1/"'
+        }
+        staging {
+            dimension "version"
+            applicationId "com.toptal.calories.staging"
+            buildConfigField 'String', 'SERVER', '"https://firebase-api-staging/api/v1/"'
+        }
+        production {
+            dimension "version"
+            applicationId "com.toptal.calories"
+            buildConfigField 'String', 'SERVER', '"https://firebase-api-production/api/v1/"'
+        }
+
+    }
+
 }
 
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.3.0'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.1'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.4.1'
+    implementation 'com.google.firebase:firebase-firestore-ktx:24.0.1'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    //Retrofit
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+
+    // Koin main features for Android
+    implementation "io.insert-koin:koin-android:$koin_version"
+    // No more koin-android-viewmodel, koin-android-scope, koin-android-fragment
+
+    // Java Compatibility
+    implementation "io.insert-koin:koin-android-compat:$koin_version"
+    // Jetpack WorkManager
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    // Navigation Graph
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
+    // Jetpack Compose
+    implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
+
+    //Hawk
+    implementation 'com.orhanobut:hawk:2.0.1'
+
+    //Rx Java
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.6'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
+
+    //TabLayout for viewpager2
+    implementation "com.google.android.material:material:1.6.0-alpha03"
+
+    //Firebase SDK for Google Analytics
+//    implementation 'com.google.firebase:firebase-analytics:20.1.0'
+//
+//    //Firebase Authentication
+//    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+//
+    //Firebase RealTime-Database
+    implementation 'com.google.firebase:firebase-core:20.1.0'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.3'
+
+    //Firebase Storage
+    implementation 'com.google.firebase:firebase-storage-ktx:20.0.0'
+
+//    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+
+    // Declare the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-auth-ktx'
+    //jwt
+    implementation 'io.jsonwebtoken:jjwt:0.7.0'
 }

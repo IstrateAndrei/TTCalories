@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/arf_first_week_label_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_dimen"
+        android:layout_marginTop="32dp"
+        android:text="@string/number_of_added_entries_in_last_seven_days"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/arf_first_week_value_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_dimen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/arf_first_week_label_tv"
+        app:layout_constraintStart_toEndOf="@id/arf_first_week_label_tv"
+        app:layout_constraintTop_toTopOf="@id/arf_first_week_label_tv"
+        tools:text="16" />
+
+    <TextView
+        android:id="@+id/arf_second_week_label_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:text="@string/number_of_added_entries_in_last_14_days"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/arf_first_week_label_tv"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/arf_second_week_value_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_dimen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/arf_second_week_label_tv"
+        app:layout_constraintStart_toEndOf="@id/arf_second_week_label_tv"
+        app:layout_constraintTop_toTopOf="@id/arf_second_week_label_tv"
+        tools:text="24"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/arf_week_before_label_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_dimen"
+        android:text="@string/number_of_added_entries_in_the_week_before_days"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/arf_second_week_label_tv" />
+
+    <TextView
+        android:id="@+id/arf_week_before_value_tv"
+        style="@style/defaultTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/default_margin_dimen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@id/arf_week_before_label_tv"
+        app:layout_constraintStart_toEndOf="@id/arf_week_before_label_tv"
+        app:layout_constraintTop_toTopOf="@id/arf_week_before_label_tv"
+        tools:text="24" />
+
+    <TextView
+        android:id="@+id/arf_avg_list_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/arf_week_before_label_tv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="@dimen/default_margin_dimen"
+        style="@style/defaultTextView"
+        android:text="@string/average_user_calories_last_days"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/arf_avg_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/default_margin_dimen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/arf_avg_list_title_tv" />
+
+    <ProgressBar
+        android:id="@+id/arf_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

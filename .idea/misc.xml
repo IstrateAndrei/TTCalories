@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/day_item_default_background.xml" value="0.2485" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/default_button_background_drawable.xml" value="0.3635" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/entry_item_card_parent_background_drawable.xml" value="0.297" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/entry_item_default_background.xml" value="0.267" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/entry_item_exceeded_limit_background.xml" value="0.267" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/ic_baseline_arrow_forward_24.xml" value="0.247" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/ic_baseline_calories_16.xml" value="0.1935" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.2835" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/ic_baseline_fastfood_24.xml" value="0.1935" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.275" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/ic_baseline_timestamp_16.xml" value="0.1935" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/drawable/ic_calories_psd.xml" value="0.2215" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/activity_login.xml" value="0.16" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/admin_activity_layout.xml" value="0.21458333333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/admin_entries_fragment_layout.xml" value="0.21458333333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/admin_reports_fragment_layout.xml" value="0.21458333333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/average_cal_item_layout.xml" value="0.2911458333333333" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/content_main.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/day_item_layout.xml" value="0.28802083333333334" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/entry_item_adapter_layout.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/entry_list_fragment_layout.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/filter_date_dialog_layout.xml" value="0.30520833333333336" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/fragment_add_entry.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/fragment_admin_login.xml" value="0.3625" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/fragment_entry_list.xml" value="0.22447916666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/fragment_user_login.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/register_fragment_layout.xml" value="0.26875" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/layout/settings_fragment_layout.xml" value="0.24583333333333332" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/Calories/app/src/main/res/menu/menu_main.xml" value="0.2703125" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

@@ -1,12 +1,61 @@
 <resources>
     <string name="app_name">Calories</string>
+    <!--    menu action strings-->
     <string name="action_settings">Settings</string>
+    <string name="action_filters">Filters</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="entries_label">Entries</string>
+    <string name="add_entry_label">Add Entry</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <!--    Authentication Strings-->
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="register_string">Register</string>
+    <string name="error_invalid_email_format">Invalid email format!</string>
+    <string name="email_verification_message_string">A verification email has been sent. Check your inbox.</string>
+    <string name="no_account_can_register">Don\'t have an account? <b><font fgcolor='#4b0082'>register here</font></b></string>
+    <string name="or_login">Or <b><font fgcolor='#4b0082'>login.</font></b></string>
+    <string name="complete_fields_warning_string">Complete all fields before!</string>
+    <string name="password_and_confirm_password_different_string">The password and confirm password fields have different values!</string>
+    <string name="registration_completed_string">Registration Completed!</string>
+    <string name="error_send_email_verification_message_string">Couldn\'t send verification email.</string>
+    <string name="registration_failed_string">Registration Failed!</string>
+    <string name="unable_to_connect_string">Unable to connect!</string>
+    <string name="accept_terms_and_conditions_string">I have read and accept the terms\n and conditions.</string>
+    <string name="accept_terms_and_conditions_warning_string">Please accept the terms and conditions before registration.</string>
+    <!--    Add Entry Strings-->
+    <string name="food_name">Food name</string>
+    <string name="caloric_value">Caloric value</string>
+    <string name="date_time">Date/Time</string>
+    <string name="update">Update</string>
+    <string name="pick_entry_time">Pick entry time</string>
+
+    <!--    Settings Strings-->
+    <string name="current_caloric_limit">Current caloric limit:</string>
+    <string name="change_limit">Change limit</string>
+    <string name="apply">Apply</string>
+    <string name="logout">Logout</string>
+    <string name="admin_panel">Admin Panel</string>
+    <string name="caloric_limit_changed">Caloric limit has changed!</string>
+
+    <!--    Admin Panel Strings-->
+    <string name="reports">Reports</string>
+    <string name="entry_deleted">Entry deleted!</string>
+    <string name="number_of_added_entries_in_last_seven_days">Number of entries in the last 7 days:</string>
+    <string name="number_of_added_entries_in_last_14_days">Number of entries in the last 14 days:</string>
+    <string name="number_of_added_entries_in_the_week_before_days">Number of entries the week before:</string>
+    <string name="average_user_calories_last_days">Average user calories\n in the last 7 days</string>
+
+    <!--    Filter dialog Strings-->
+    <string name="from">From</string>
+    <string name="clear">Clear</string>
+    <string name="clear_from">Clear From</string>
+    <string name="to">To</string>
+    <string name="clear_to">Clear To</string>
 </resources>
