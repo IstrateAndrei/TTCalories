@@ -14,7 +14,6 @@ import java.util.*
 
 class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
 
-
     val entryList = mutableListOf<FoodEntry>()
 
     private lateinit var listener: OnEntryClickListener
@@ -31,7 +30,6 @@ class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
             false
         )
         return EntryViewHolder(binding)
-
     }
 
     override fun onBindViewHolder(holder: EntryViewHolder, position: Int) {
@@ -54,16 +52,6 @@ class EntriesAdapter : RecyclerView.Adapter<EntriesAdapter.EntryViewHolder>() {
             entryList.remove(item)
         }
         notifyItemRemoved(position)
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun applyFromFilter(fromDate: Date?) {
-        fromDate?.let {
-            val fromFiltered = entryList.filter { item -> item.entry_date!!.after(it) }
-            entryList.clear()
-            entryList.addAll(fromFiltered)
-            notifyDataSetChanged()
-        }
     }
 
     override fun getItemCount(): Int {

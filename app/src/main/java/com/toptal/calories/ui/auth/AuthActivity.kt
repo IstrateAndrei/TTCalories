@@ -8,8 +8,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.toptal.calories.R
 import com.toptal.calories.utils.base.BaseActivity
-import com.toptal.calories.utils.isUserLoggedIn
-import com.toptal.calories.utils.openMainScreen
 
 class AuthActivity : BaseActivity() {
 

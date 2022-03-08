@@ -53,8 +53,6 @@ class LoginFragment : BaseFragment() {
             if (response.isSuccessful) {
                 FirebaseAuth.getInstance().currentUser?.let {
                     if (it.isEmailVerified) {
-//                        it.getIdToken(false).result.token // bearer token for account
-                        // open entry list screen
                         requireActivity().openMainScreen()
                     } else {
                         showSnackMessage(
@@ -79,9 +77,7 @@ class LoginFragment : BaseFragment() {
     }
 
     override fun initListeners() {
-
         initEditFieldWatchers()
-
         binding.fulLoginBtn.setOnClickListener {
 
             val email = binding.fulEmailEt.text.toString()
@@ -97,7 +93,6 @@ class LoginFragment : BaseFragment() {
         binding.fulRegisterMsgTv.setOnClickListener {
             findNavController().navigate(R.id.login_to_register_action)
         }
-
     }
 
     fun initEditFieldWatchers() {
@@ -113,8 +108,6 @@ class LoginFragment : BaseFragment() {
 
             override fun afterTextChanged(p0: Editable?) {
             }
-
-
         })
         binding.fulPasswordEt.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -129,8 +122,6 @@ class LoginFragment : BaseFragment() {
             override fun afterTextChanged(p0: Editable?) {
 
             }
-
         })
-
     }
 }

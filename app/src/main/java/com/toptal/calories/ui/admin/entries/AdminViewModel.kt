@@ -1,12 +1,10 @@
 package com.toptal.calories.ui.admin.entries
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.QuerySnapshot
 import com.toptal.calories.data.model.FoodEntry
-import com.toptal.calories.data.model.User
 import com.toptal.calories.data.repository.Repository
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject

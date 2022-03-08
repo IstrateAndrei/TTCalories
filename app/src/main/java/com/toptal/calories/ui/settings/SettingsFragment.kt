@@ -63,7 +63,6 @@ class SettingsFragment : BaseFragment() {
             }
         })
         binding.sfSetBtn.setOnClickListener {
-
             val newValue = binding.sfChangeEt.text.toString().toInt()
 
             Hawk.put(Constants.HAWK_CALORIC_LIMIT_KEY, newValue)
@@ -74,9 +73,7 @@ class SettingsFragment : BaseFragment() {
             binding.sfChangeEt.setText("")
             binding.sfChangeEt.clearFocus()
             binding.sfChangeTil.clearFocus()
-
         }
-
     }
 
 

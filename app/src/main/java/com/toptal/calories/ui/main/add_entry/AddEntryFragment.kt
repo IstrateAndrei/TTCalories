@@ -12,8 +12,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.toptal.calories.R
 import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.AddEntryFragmentLayoutBinding
-import com.toptal.calories.ui.admin.AdminActivity
-
 import com.toptal.calories.utils.*
 import com.toptal.calories.utils.base.BaseFragment
 import java.util.*
@@ -37,7 +35,6 @@ class AddEntryFragment : BaseFragment() {
     ): View {
         _binding = AddEntryFragmentLayoutBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -87,13 +84,11 @@ class AddEntryFragment : BaseFragment() {
                     binding.faeDateTv.text = getStringFromDateTime(it)
                 }
             }
-        } else {
-            //normal add entry flow
+        } else { //normal add entry flow. Nothing to add for now
         }
     }
 
     override fun initListeners() {
-
         binding.faePickDateBtn.setOnClickListener {
             DatePickerDialog(
                 requireContext(),
@@ -137,7 +132,6 @@ class AddEntryFragment : BaseFragment() {
                     }
                 }
             } else {
-
                 val entry = FoodEntry()
                 entry.created_at = null
                 entry.calories = caloricValue.toInt()
@@ -163,7 +157,6 @@ class AddEntryFragment : BaseFragment() {
         }
 
     private val timeListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-
         selectedDate?.set(Calendar.HOUR_OF_DAY, hourOfDay)
         selectedDate?.set(Calendar.MINUTE, minute)
 

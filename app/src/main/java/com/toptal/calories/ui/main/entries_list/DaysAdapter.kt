@@ -5,12 +5,10 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.compose.ui.res.colorResource
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.orhanobut.hawk.Hawk
-import com.toptal.calories.R
 import com.toptal.calories.data.model.Day
 import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.DayItemLayoutBinding

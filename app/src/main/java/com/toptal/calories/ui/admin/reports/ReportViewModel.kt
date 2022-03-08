@@ -1,6 +1,5 @@
 package com.toptal.calories.ui.admin.reports
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.EventListener
@@ -13,7 +12,6 @@ import org.koin.core.component.inject
 
 class ReportViewModel : ViewModel(), KoinComponent {
 
-    val firstWeekObservable = MutableLiveData<MutableList<FoodEntry>>()
     val otherWeekObservable = MutableLiveData<MutableList<FoodEntry>>()
     val allUsersObservable = MutableLiveData<MutableList<User>>()
     val errorObservable = MutableLiveData<Exception>()

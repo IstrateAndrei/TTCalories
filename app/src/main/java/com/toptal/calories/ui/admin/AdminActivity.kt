@@ -1,12 +1,10 @@
 package com.toptal.calories.ui.admin
 
 import android.os.Bundle
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.toptal.calories.R
-import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.AdminActivityLayoutBinding
 import com.toptal.calories.ui.admin.entries.AdminViewModel
 import com.toptal.calories.utils.base.BaseActivity

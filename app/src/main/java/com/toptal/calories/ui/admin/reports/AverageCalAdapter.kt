@@ -2,7 +2,6 @@ package com.toptal.calories.ui.admin.reports
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.toptal.calories.data.model.AverageCals
