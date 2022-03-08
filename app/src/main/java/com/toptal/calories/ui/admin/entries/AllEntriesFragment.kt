@@ -50,7 +50,7 @@ class AllEntriesFragment : BaseFragment() {
         (requireActivity() as AdminActivity).adminViewModel.entriesObservable.observe(
             viewLifecycleOwner
         ) { list ->
-            (binding.aefRv.adapter as EntriesAdapter).updateList(list.sortedBy { item -> item.entry_date } as MutableList<FoodEntry>)
+            (binding.aefRv.adapter as EntriesAdapter).updateList(if (list.isEmpty()) list else list.sortedBy { item -> item.entry_date } as MutableList<FoodEntry>)
             toggleLoading(false)
         }
         (requireActivity() as AdminActivity).adminViewModel.deleteEntryObservable.observe(
