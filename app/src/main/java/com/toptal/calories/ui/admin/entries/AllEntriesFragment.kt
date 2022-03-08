@@ -109,18 +109,27 @@ class AllEntriesFragment : BaseFragment() {
         (binding.aefRv.adapter as EntriesAdapter).setupListener(object :
             EntriesAdapter.OnEntryClickListener {
             override fun onEntryClicked(item: FoodEntry, position: Int) {
-                val fragment = AddEntryFragment()
-                val bundle = Bundle()
-                bundle.putParcelable(Constants.BUNDLE_ADMIN_ITEM_KEY, item)
-                fragment.arguments = bundle
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .add(binding.aefFrameContainer.id, fragment)
-                    .addToBackStack(AddEntryFragment::class.java.simpleName).commit()
+
+                if (requireContext().isNetworkAvailable()) {
+                    val fragment = AddEntryFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable(Constants.BUNDLE_ADMIN_ITEM_KEY, item)
+                    fragment.arguments = bundle
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .add(binding.aefFrameContainer.id, fragment)
+                        .addToBackStack(AddEntryFragment::class.java.simpleName).commit()
+                } else {
+                    showSnackMessage(requireView(), "Network unavailable, try again later.")
+                }
             }
 
             override fun onEntryDeleted(item: FoodEntry, position: Int) {
-                toggleLoading(true)
-//                (requireActivity() as AdminActivity).adminViewModel.deleteEntry(item, position)
+                if (requireContext().isNetworkAvailable()) {
+                    toggleLoading(true)
+                    (requireActivity() as AdminActivity).adminViewModel.deleteEntry(item, position)
+                } else {
+                    showSnackMessage(requireView(), "Network unavailable, try again later.")
+                }
             }
         })
 
