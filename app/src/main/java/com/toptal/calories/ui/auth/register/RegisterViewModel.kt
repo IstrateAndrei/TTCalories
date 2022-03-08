@@ -49,5 +49,4 @@ class RegisterViewModel : ViewModel(), KoinComponent {
             }
         }
     }
-
 }

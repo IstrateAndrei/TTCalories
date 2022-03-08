@@ -18,11 +18,6 @@ class AuthActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //skip Auth screen if user logged in
-        if (isUserLoggedIn()) {
-            this.openMainScreen()
-            return
-        }
 
         setContentView(R.layout.activity_login)
         navController = findNavController(R.id.nav_host_fragment_content_login)

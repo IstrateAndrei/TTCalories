@@ -53,8 +53,8 @@ class LoginFragment : BaseFragment() {
             if (response.isSuccessful) {
                 FirebaseAuth.getInstance().currentUser?.let {
                     if (it.isEmailVerified) {
-                        // open entry list screen
 //                        it.getIdToken(false).result.token // bearer token for account
+                        // open entry list screen
                         requireActivity().openMainScreen()
                     } else {
                         showSnackMessage(
@@ -92,11 +92,6 @@ class LoginFragment : BaseFragment() {
             }
             toggleLoading(true)
             loginViewModel.loginAction(email, password)
-
-//            val jwt = Jwts.builder().claim("email", email).claim("password", password)
-//                .signWith(SignatureAlgorithm.HS256, "secret".encodeToByteArray()).compact()
-//
-//            loginViewModel.loginWithToken(jwt)
         }
 
         binding.fulRegisterMsgTv.setOnClickListener {

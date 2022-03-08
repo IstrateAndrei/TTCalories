@@ -8,9 +8,9 @@
     <application
         android:name=".application.CaloriesApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_ttcalories_launch"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_ttcalories_launch"
         android:supportsRtl="true"
         android:theme="@style/Theme.Calories">
         <activity
@@ -18,12 +18,23 @@
             android:exported="true"
             android:theme="@style/Theme.Calories.NoActionBar"
             android:windowSoftInputMode="adjustPan">
+
         </activity>
 
         <activity
             android:name=".ui.auth.AuthActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustPan">
+            android:windowSoftInputMode="adjustPan"></activity>
+
+        <activity
+            android:name=".ui.admin.AdminActivity"
+            android:exported="true"
+            android:label="Admin Panel"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,11 +42,6 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.admin.AdminActivity"
-            android:exported="true"
-            android:label="Admin Panel"
-            android:windowSoftInputMode="adjustPan" />
     </application>
 
 </manifest>

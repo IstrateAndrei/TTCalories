@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.toptal.calories.R
 import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.AddEntryFragmentLayoutBinding
+import com.toptal.calories.ui.admin.AdminActivity
 
 import com.toptal.calories.utils.*
 import com.toptal.calories.utils.base.BaseFragment
@@ -56,6 +57,7 @@ class AddEntryFragment : BaseFragment() {
             showSnackMessage(requireView(), "Added new food entry!")
             if (isAdminAdd) {
                 requireActivity().supportFragmentManager.popBackStack()
+//                (requireActivity() as AdminActivity).adminViewModel.getFirstWeekEntries()
             } else {
                 findNavController().popBackStack()
             }
@@ -63,11 +65,12 @@ class AddEntryFragment : BaseFragment() {
         addEntryViewModel.updateEntryObservable.observe(viewLifecycleOwner) {
             showSnackMessage(requireView(), "Food entry updated!")
             requireActivity().supportFragmentManager.popBackStack()
+//            (requireActivity() as AdminActivity).adminViewModel.getFirstWeekEntries()
         }
     }
 
     override fun toggleLoading(isLoading: Boolean) {
-
+        //no progress bar here...screen pops after adding/updating
     }
 
     override fun initViews() {
@@ -126,7 +129,10 @@ class AddEntryFragment : BaseFragment() {
                         updatedItem.created_at = null
                         updatedItem.creator_id = item.creator_id
                         updatedItem.entry_id = item.entry_id
-                        updatedItem.entry_date = if(selectedDate != null) selectedDate!!.time else getDateTimeFromString(entryDate)
+                        updatedItem.entry_date =
+                            if (selectedDate != null) selectedDate!!.time else getDateTimeFromString(
+                                entryDate
+                            )
                         addEntryViewModel.updateEntry(updatedItem)
                     }
                 }

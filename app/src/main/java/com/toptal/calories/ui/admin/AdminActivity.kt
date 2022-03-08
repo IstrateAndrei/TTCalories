@@ -1,12 +1,14 @@
 package com.toptal.calories.ui.admin
 
 import android.os.Bundle
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.toptal.calories.R
+import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.AdminActivityLayoutBinding
-import com.toptal.calories.ui.admin.entries.AllEntriesViewModel
+import com.toptal.calories.ui.admin.entries.AdminViewModel
 import com.toptal.calories.utils.base.BaseActivity
 
 class AdminActivity : BaseActivity() {
@@ -14,12 +16,12 @@ class AdminActivity : BaseActivity() {
     private var _binding: AdminActivityLayoutBinding? = null
     val binding get() = _binding!!
 
-    lateinit var adminViewModel: AllEntriesViewModel
+    lateinit var adminViewModel: AdminViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = AdminActivityLayoutBinding.inflate(layoutInflater)
-        adminViewModel = ViewModelProvider(this).get(AllEntriesViewModel::class.java)
+        adminViewModel = ViewModelProvider(this).get(AdminViewModel::class.java)
         setContentView(binding.root)
         initViews()
         initListeners()

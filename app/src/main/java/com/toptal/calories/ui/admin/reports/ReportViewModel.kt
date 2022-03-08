@@ -20,22 +20,11 @@ class ReportViewModel : ViewModel(), KoinComponent {
 
     val repository by inject<Repository>()
 
-    fun getFirstWeekEntries() {
-        val snapShotListener = EventListener<QuerySnapshot> { value, error ->
-            if (error != null) {
-                Log.e("Fail", "Failure")
-                errorObservable.value = error
-                return@EventListener
-            }
-            firstWeekObservable.value = value?.toObjects(FoodEntry::class.java)
-        }
-        repository.getFirstWeekEntries(snapShotListener)
-    }
+
 
     fun getSecondWeekEntries() {
         val snapShotListener = EventListener<QuerySnapshot> { value, error ->
             if (error != null) {
-                Log.e("Fail", "Failure")
                 errorObservable.value = error
                 return@EventListener
             }
@@ -47,8 +36,6 @@ class ReportViewModel : ViewModel(), KoinComponent {
     fun getAllUsers() {
         val snapShotListener = EventListener<QuerySnapshot> { value, error ->
             if (error != null) {
-                //fail
-                Log.e("Fail", "Failure")
                 errorObservable.value = error
                 return@EventListener
             }

@@ -17,10 +17,4 @@ class LoginViewModel : ViewModel(), KoinComponent {
             loginObservable.value = task
         }
     }
-
-    fun loginWithToken(token: String) {
-        FirebaseAuth.getInstance().signInWithCustomToken(token).addOnCompleteListener { task ->
-            loginObservable.value = task
-        }
-    }
 }

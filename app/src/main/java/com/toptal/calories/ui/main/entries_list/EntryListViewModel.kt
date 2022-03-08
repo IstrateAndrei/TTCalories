@@ -27,8 +27,6 @@ class EntryListViewModel : ViewModel(), KoinComponent {
     fun getUserEntries(userId: String) {
         val snapShotListener = EventListener<QuerySnapshot> { value, error ->
             if (error != null) {
-                //fail
-                Log.e("Fail", "Failure")
                 errorObservable.value = error
                 return@EventListener
             }

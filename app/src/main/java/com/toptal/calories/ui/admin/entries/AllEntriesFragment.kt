@@ -58,6 +58,7 @@ class AllEntriesFragment : BaseFragment() {
         ) { result ->
             showSnackMessage(requireView(), getString(R.string.entry_deleted))
             (binding.aefRv.adapter as EntriesAdapter).removeEntry(result.first, result.second)
+            (requireActivity() as AdminActivity).adminViewModel.getFirstWeekEntries()
             toggleLoading(false)
         }
         (requireActivity() as AdminActivity).adminViewModel.errorObservable.observe(
@@ -119,7 +120,7 @@ class AllEntriesFragment : BaseFragment() {
 
             override fun onEntryDeleted(item: FoodEntry, position: Int) {
                 toggleLoading(true)
-                (requireActivity() as AdminActivity).adminViewModel.deleteEntry(item, position)
+//                (requireActivity() as AdminActivity).adminViewModel.deleteEntry(item, position)
             }
         })
 

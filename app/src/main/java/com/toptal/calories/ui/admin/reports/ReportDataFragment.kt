@@ -41,12 +41,12 @@ class ReportDataFragment : BaseFragment() {
         initViews()
         initListeners()
         observe()
-        reportViewModel.getFirstWeekEntries()
+        (requireActivity() as AdminActivity).adminViewModel.getFirstWeekEntries()
     }
 
     override fun observe() {
 
-        reportViewModel.firstWeekObservable.observe(viewLifecycleOwner) { list ->
+        (requireActivity() as AdminActivity).adminViewModel.firstWeekObservable.observe(viewLifecycleOwner) { list ->
             sevenDayList.clear()
             sevenDayList.addAll(list)
             binding.arfFirstWeekValueTv.text = list.size.toString()
