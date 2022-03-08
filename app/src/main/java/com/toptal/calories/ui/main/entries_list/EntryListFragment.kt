@@ -73,11 +73,13 @@ class EntryListFragment : BaseFragment() {
                 daysList.add(day)
             }
 
-            (binding.felRv.adapter as DaysAdapter).updateList(daysList.sortedBy { item ->
-                getDateFromString(
-                    item.dateString
-                )
-            } as MutableList<Day>)
+            (binding.felRv.adapter as DaysAdapter).updateList(
+                if (daysList.isNotEmpty())
+                    daysList.sortedBy { item ->
+                        getDateFromString(
+                            item.dateString
+                        )
+                    } as MutableList<Day> else daysList)
             toggleLoading(false)
         }
         mViewModel?.errorObservable?.observe(viewLifecycleOwner) {
