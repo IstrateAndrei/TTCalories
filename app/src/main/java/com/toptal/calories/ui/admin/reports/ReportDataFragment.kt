@@ -11,9 +11,7 @@ import com.toptal.calories.data.model.FoodEntry
 import com.toptal.calories.databinding.AdminReportsFragmentLayoutBinding
 import com.toptal.calories.ui.admin.AdminActivity
 import com.toptal.calories.utils.base.BaseFragment
-import com.toptal.calories.utils.getDaysAgoDate
 import com.toptal.calories.utils.getViewVisibility
-import java.util.*
 
 class ReportDataFragment : BaseFragment() {
 
@@ -41,12 +39,12 @@ class ReportDataFragment : BaseFragment() {
         initViews()
         initListeners()
         observe()
-        reportViewModel.getFirstWeekEntries()
+        (requireActivity() as AdminActivity).adminViewModel.getFirstWeekEntries()
     }
 
     override fun observe() {
 
-        reportViewModel.firstWeekObservable.observe(viewLifecycleOwner) { list ->
+        (requireActivity() as AdminActivity).adminViewModel.firstWeekObservable.observe(viewLifecycleOwner) { list ->
             sevenDayList.clear()
             sevenDayList.addAll(list)
             binding.arfFirstWeekValueTv.text = list.size.toString()

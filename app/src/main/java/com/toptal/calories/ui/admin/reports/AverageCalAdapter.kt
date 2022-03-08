@@ -2,7 +2,6 @@ package com.toptal.calories.ui.admin.reports
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.toptal.calories.data.model.AverageCals
@@ -10,17 +9,15 @@ import com.toptal.calories.databinding.AverageCalItemLayoutBinding
 
 class AverageCalAdapter : RecyclerView.Adapter<AverageCalAdapter.AverageCalViewHolder>() {
 
-    var _binding: AverageCalItemLayoutBinding? = null
-    val binding get() = _binding!!
     val avgCalList = mutableListOf<AverageCals>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AverageCalViewHolder {
-        _binding = AverageCalItemLayoutBinding.inflate(
+        val binding = AverageCalItemLayoutBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
-        return AverageCalViewHolder(binding.root)
+        return AverageCalViewHolder(binding)
     }
 
     override fun getItemId(position: Int): Long {
@@ -46,7 +43,8 @@ class AverageCalAdapter : RecyclerView.Adapter<AverageCalAdapter.AverageCalViewH
         return avgCalList.size
     }
 
-    inner class AverageCalViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class AverageCalViewHolder(var binding: AverageCalItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun displayData(item: AverageCals, position: Int) {
             binding.aciUserTv.text = item.userName

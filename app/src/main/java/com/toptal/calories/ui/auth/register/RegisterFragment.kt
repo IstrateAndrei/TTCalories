@@ -57,7 +57,11 @@ class RegisterFragment : BaseFragment() {
                     getString(R.string.email_verification_message_string)
                 )
                 FirebaseAuth.getInstance().currentUser?.let { user ->
-                    registerViewModel.registerToFireStore(user.email!!, user.displayName!!, user.uid)
+                    registerViewModel.registerToFireStore(
+                        user.email!!,
+                        user.displayName!!,
+                        user.uid
+                    )
                 }
 
             } else {
@@ -81,7 +85,6 @@ class RegisterFragment : BaseFragment() {
 
     override fun initListeners() {
         binding.rfRegisterBtn.setOnClickListener {
-
             val email = binding.rfEmailEt.text.toString()
             val username = binding.rfUsernameEt.text.toString()
             val password = binding.rfPasswordEt.text.toString()
@@ -115,8 +118,6 @@ class RegisterFragment : BaseFragment() {
             toggleLoading(true)
             registerViewModel.registerAuthUser(email, password)
         }
-
-
         binding.rfOrSignInTv.setOnClickListener {
             findNavController().popBackStack()
         }

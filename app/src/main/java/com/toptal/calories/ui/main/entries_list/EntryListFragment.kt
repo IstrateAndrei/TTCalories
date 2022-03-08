@@ -192,4 +192,8 @@ class EntryListFragment : BaseFragment() {
         if (binding.felRv.adapter == null) binding.felRv.adapter = DaysAdapter()
     }
 
+    override fun onResume() {
+        super.onResume()
+        mViewModel?.getUserEntries(FirebaseAuth.getInstance().currentUser?.uid!!)
+    }
 }
