@@ -83,9 +83,12 @@ class MainActivity : AppCompatActivity() {
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     val queryDocSnapshot = task.result
-                    val user = queryDocSnapshot.toObjects(User::class.java)[0]
-                    optionsMenu.findItem(R.id.action_admin).isVisible = user?.admin == true
-                    setAdminRights(user?.admin == true)
+                    val users = queryDocSnapshot.toObjects(User::class.java)
+                    if(users.isNotEmpty()){
+                        val user = queryDocSnapshot.toObjects(User::class.java)[0]
+                        optionsMenu.findItem(R.id.action_admin).isVisible = user?.admin == true
+                        setAdminRights(user?.admin == true)
+                    }
                 }
             }
     }

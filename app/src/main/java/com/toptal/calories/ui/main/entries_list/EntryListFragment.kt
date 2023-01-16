@@ -75,7 +75,7 @@ class EntryListFragment : BaseFragment() {
 
             (binding.felRv.adapter as DaysAdapter).updateList(
                 if (daysList.isNotEmpty())
-                    daysList.sortedBy { item ->
+                    daysList.sortedByDescending { item ->
                         getDateFromString(
                             item.dateString
                         )

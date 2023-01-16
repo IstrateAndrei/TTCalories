@@ -150,6 +150,12 @@ fun clearToFilter() {
     Hawk.delete(Constants.HAWK_TO_FILTER_KEY)
 }
 
+fun removeExtraHours(){
+//    getFromFilter()?.let {
+//        it.time - Calendar.getInstance().set(it.)
+//    }
+}
+
 @SuppressLint("ObsoleteSdkInt")
 fun Context.isNetworkAvailable(): Boolean {
     val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
